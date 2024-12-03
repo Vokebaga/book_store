@@ -1,0 +1,16 @@
+// Task 13: Search by Title
+
+const searchByTitle = (title) => {
+  return books.filter(b => b.title.toLowerCase().includes(title.toLowerCase()));
+};
+
+app.get("/books/title/:title", (req, res) => {
+  const { title } = req.params;
+  const titleBooks = searchByTitle(title);
+  
+  if (titleBooks.length > 0) {
+    res.json(titleBooks);
+  } else {
+    res.status(404).json({ message: "No books found with this title" });
+  }
+});
